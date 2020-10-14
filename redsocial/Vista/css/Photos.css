@@ -1,0 +1,66 @@
+.body_format{
+    background-color:#dfe6e9;
+}
+.container_format{
+    background-color: #FFF;
+    margin-top: 15px;
+    padding: 30px;
+}
+
+.container_format > div > div > span{   
+    border-bottom: 1px #00a8ff solid;
+    padding: 0px 20px 0px 20px;
+}
+
+.modal-header-format{
+    background-color: #03A9F4;
+    color: #fff;
+}
+
+.btn_format{
+    background-color: #03A9F4;
+}
+
+.container_format > div > div > i{   
+    color:  #03A9F4;
+    cursor: pointer;    
+    float: right;
+}
+
+
+#sc_photo{
+    border-bottom: 1px #00a8ff solid;
+    text-align: right;
+    color: #03A9F4;
+    padding-bottom: 5px;
+    padding-right: 10px;
+}
+
+
+.icon{
+    border-bottom: 1px #00a8ff solid;
+    text-align: right;
+    color: #ee5253;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+
+#Img_sec{
+    margin-top: 20px;
+    padding: 10px;
+}
+
+#Img_sec > div{
+    margin-top: 20px;
+}
+
+#Img_sec > div >div {
+    box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+img.fe{
+
+    width: 280px; height: 200px;
+}

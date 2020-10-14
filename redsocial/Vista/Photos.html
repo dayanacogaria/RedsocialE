@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/Photos.css">
+    <title>Photos</title>
+</head>
+
+<body class="body_format">
+    
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="home.html">RED SOCIAL</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="home.html"><span class="glyphicon glyphicon-home"></span>&nbsp;Inicio</a></li>
+      
+        <li><a href="perfil.html"><span class="glyphicon glyphicon-user"></span>&nbsp;Perfil</a></li>
+        <li class="active" ><a href="Photos.html"><span class="glyphicon glyphicon-picture"></span>&nbsp;Fotos</a></li>
+        <li><a href="amigos.html"><span class="glyphicon glyphicon-user"></span>&nbsp;Amigos</a></li>
+      
+        <li ><a href="chat.html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Mensajes</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Cerrar Sesion</a></li>
+      </ul>
+      <form class="navbar-form navbar-right"  >
+        <div class="input-group" >
+          <input type="text" class="form-control" placeholder="Search" name="search">
+          
+        </div>
+      </form>
+    </div>
+  </nav>
+
+
+
+    <div class="container container_format">
+        <div class="row">
+            <div class="col-md-6">
+                <span>Mis Fotos</span>
+            </div>
+            <div class="col-md-6">
+                <i class="fa fa-cloud-upload fa-3x"  data-toggle="modal" data-target="#exampleModal" data-toggle="tooltip" data-placement="top" title="Cargar Fotografia"></i>
+            </div>
+          </div>
+    </div>
+
+    <div class="container container_format">
+      
+        <div class="row">
+            <div class="col-md-12">
+              <div id="sc_photo">
+                <span>Seccion Fotografica</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="__alert" class="alert alert-success" role="alert" style="display: none;">Registro Eliminado</div>
+          <div class="row" id="Img_sec">
+              <div class="col-md-6">
+                <div class="card" id="card1" style="width: 28rem;">
+                    <div class="icon">
+                        <i class="fa fa-trash fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Eliminar" onclick="__Remove(this)"></i>
+                      </div>
+                    <img src="upload/Como dar Like Automatico por Palabra Clave en Twitter con Python.png" class="img-fe" alt="..."  style="width: 280px; height: 200px;">
+                    <div class="card-body">
+                      <p class="card-text"></p>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card" id="card2" style="width: 28rem;">
+                    <div class="icon">
+                        <i class="fa fa-trash fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Eliminar" onclick="__Remove(this)"></i>
+                      </div>
+                    <img src="upload/Como Aumentar tus Seguidores en Instagram con Instabot Python.png" class="card-img-top" alt="..." style="width: 280px; height: 200px;">
+                    <div class="card-body">
+                      <p class="card-text"></p>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card" style="width: 28rem;">
+                    <div class="icon" id="card3">
+                        <i class="fa fa-trash fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Eliminar" onclick="__Remove(this)"></i>
+                      </div>
+                    <img src="upload/como instalar wordpress en local con xampp.png" class="card-img-top" alt="..." style="width: 280px; height: 200px;">
+                    <div class="card-body">
+                      <p class="card-text"></p>
+                    </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+
+
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header modal-header-format">
+          <h5 class="modal-title" id="exampleModalLabel">Carga de Fotografias</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="file-loading">
+            <input id="input-b9" name="input-b9[]" multiple type="file"'>
+          </div>
+          <div id="kartik-file-errors"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary btn_format" title="Your custom upload logic">Cargar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/Photo.js"></script>
+
+</body>
+
+</html>
