@@ -1,3 +1,10 @@
+<?php
+session_start();
+require("../modelo/ModelsAmigos.php");
+if (empty($_SESSION['firstname'])){
+    header("Location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,16 +45,20 @@
 <div class="container">
     
 	<div class="row">
+  <?php                      
+      $arrayUsuarios = ModelsAmigos::getAll();
+      foreach ($arrayUsuarios as $Usuarios){
+    ?>
         <div class="col-md-8">
             <div class="people-nearby">
               
               <div class="nearby-user">
                 <div class="row">
                   <div class="col-md-2 col-sm-2">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                    <img src="upload/<?php echo $Usuarios->getimage()?>" alt="user" class="profile-photo-lg">
                   </div>
                   <div class="col-md-7 col-sm-7">
-                    <h5><a href="#" class="profile-link">Sophia Page</a></h5>
+                    <h5><a href="#" class="profile-link"><?php echo $Usuarios->getFirstname()?></a></h5>
                     <p>Software Engineer</p>
                     <p class="text-muted">500m away</p>
                   </div>
@@ -56,25 +67,10 @@
                   </div>
                 </div>
               </div>
-              <div class="nearby-user">
-                <div class="row">
-                  <div class="col-md-2 col-sm-2">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user" class="profile-photo-lg">
-                  </div>
-                  <div class="col-md-7 col-sm-7">
-                    <h5><a href="#" class="profile-link">Emma Johnson</a></h5>
-                    <p>Model at Fashion</p>
-                    <p class="text-muted">800m away</p>
-                  </div>
-                  <div class="col-md-3 col-sm-3">
-                    <button class="btn btn-danger pull-right">Eliminar Amigo</button>
-                  </div>
-                </div>
-              </div>
-            
-          
+     
             </div>
-    	</div>
+      </div>
+      <?php } ?>
 	</div>
 	
     
