@@ -30,9 +30,10 @@ if (empty($_SESSION['firstname'])){
 			<div class="userProfileInfo">
 				<div class="image text-center">
 					<img src="upload/<?php echo $_SESSION['image'] ?>" alt="#" class="img-responsive">
-					<a href="#" title="#" class="editImage">
-						<i class="fa fa-camera"></i>
-					</a>
+					
+                    <button type="button" class="editImage" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa fa-camera"></i>
+                    </button>
 				</div>
 				<div class="box">
 					<div class="name"><strong><?php echo $_SESSION['firstname'] ?></strong></div>
@@ -58,22 +59,20 @@ if (empty($_SESSION['firstname'])){
              </div>
 
              <?php                      
-                                        $arrEspecialidades = ModelsHome::getAll();
-                                        foreach ($arrEspecialidades as $post){​​
+                    $arrayUsuarios = ModelsHome::getAll();
+                    foreach ($arrayUsuarios as $Usuarios){
               ?>
-                         <?php echo $post->getcontent() ?>
-          <!-- <div class="stream-post">
+          <div class="stream-post">
                 <div class="sp-author">
-                    <a href="#" class="sp-author-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt=""></a>
-                    <h6 class="sp-author-name">Palmira Guthridge</h6></div>
+                    <a href="#" class="sp-author-avatar"><img src="upload/<?php echo $Usuarios->getImage () ?>" alt=""></a>
+                    <h6 class="sp-author-name"><?php echo $Usuarios->getfirstname() ?></h6></div>
                 <div class="sp-content">
-                <h6 class="sp-author-name">Palmira Guthridge</h6></div>
-                    <div class="sp-info">posted 1h ago</div>
-                    <p class="sp-paragraph mb-0">Auk Soldanella plainscraft acetonylidene wolfishness irrecognizant Candolleaceae provision Marsipobranchii arpen Paleoanthropus supersecular inidoneous autoplagiarism palmcrist occamy equestrianism periodontoclasia mucedin overchannel goelism decapsulation pourer zira</p>
+                    <div class="sp-info"><h6><?php echo $Usuarios->getfirstname() ?></h6></div>
+                    <p class="sp-paragraph mb-0"><?php echo $Usuarios->getcontent() ?></p>
                 </div>
                
-            </div>-->
-       <?php }​​ ?>		
+            </div>
+        	<?php } ?>
          
 
             
@@ -82,6 +81,32 @@ if (empty($_SESSION['firstname'])){
 		</div>
 	</div>
     
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Foto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form  method="post" enctype="multipart/form-data" action="../controlador/controladorRegistrar.php?action=iditarimagen">
+      <div class="modal-body">
+      <div class="form-group">
+              <label for="prodfoto">Foto</label>
+              <input type="file" class="form-control" id="fotousuario" name="fotousuario" lang="es" required>
+            </div>
+      </div>
+      <div class="modal-footer">
+      <input class="form-control form-control-sm" type="text" id="member_id" name="member_id" value="<?php echo $_SESSION['member_id'] ?>">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 </body>

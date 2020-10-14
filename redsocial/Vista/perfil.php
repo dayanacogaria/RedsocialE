@@ -1,3 +1,8 @@
+<?php
+
+
+require_once (__DIR__.'/../controlador/controladorPerfil.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,50 +17,36 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="home.html">RED SOCIAL</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="home.html"><span class="glyphicon glyphicon-home"></span>&nbsp;Inicio</a></li>
-      <li class="active"><a href="perfil.html"><span class="glyphicon glyphicon-user"></span>&nbsp;Perfil</a></li>
-      <li><a href="Photos.html"><span class="glyphicon glyphicon-picture"></span>&nbsp;Fotos</a></li>
-      <li><a href="amigos.html"><span class="glyphicon glyphicon-user"></span>&nbsp;Amigos</a></li>
-      <li><a href="chat.html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Mensaje</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Cerrar Sesion</a></li>
-    </ul>
-    <form class="navbar-form navbar-right"  >
-      <div class="input-group" >
-        <input type="text" class="form-control" placeholder="Search" name="search">
-        
-      </div>
-    </form>
-  </div>
-</nav>
+<?php require("snippers/nav.php");?>
 
 
 <div class="container">
-    
+<?php
+    $DataEspecialidad = controladorPerfil::buscarID($_GET["id"]);
+    ?>
 	
 	<div class="row">
 		<div class="col-xs-12 col-md-4 col-lg-3">
 			<div class="userProfileInfo">
 				<div class="image text-center">
-					<img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="#" class="img-responsive">
-					
+					<img src="upload/<?php echo $DataEspecialidad->getImage();?>" alt="#" class="img-responsive">
+				
 				</div>
 				<div class="box" >
-					<div class="name"><strong>Nombre Usuario</strong></div>
+					<div class="name"><strong><?php echo $DataEspecialidad->getfirstname(); ?></strong></div>
                  <br>
                  
-                    <button class="btn btn-info ">Cambiar Foto</button>
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    cambiar foto
+                    </button>
                     <br>    <br>
                 </div>
             
 			</div>
 		</div>
-
+  
+    <?php if(!empty($_GET["id"]) && isset($_GET["id"])){ ?>
+    
 		<div class="col-xs-12 col-md-8 col-lg-9">
 			<div class="box">
 				 <form class="form-horizontal" ></br>
@@ -79,14 +70,14 @@
                       <div class="form-group">
                         <label for="" class="col-lg-4 control-label">Nombre</label>
                         <div class="col-lg-6">
-                          <input type="text" class="form-control" id=""
+                          <input type="text" class="form-control" id="Firstname" value="<?php echo $DataEspecialidad->getfirstname(); ?>"
                                  >
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="" class="col-lg-4 control-label">Apellido</label>
                         <div class="col-lg-6">
-                        <input type="email" class="form-control" id=""
+                        <input type="email" class="form-control" id="" value="<?php echo $DataEspecialidad->getlastname(); ?>"
                                  >
                         </div>
                       </div>
@@ -133,16 +124,39 @@
                            Actualizar
                          </button> 
                       </div>
-                                           
-                     
-                  
-                                        </form>
+  </form>
+    <?php }?>
     
 							
 			
 		</div>
 	</div>
     
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Foto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form  method="post" enctype="multipart/form-data" action="../controlador/controladorRegistrar.php?action=iditarimagen">
+      <div class="modal-body">
+      <div class="form-group">
+              <label for="prodfoto">Foto</label>
+              <input type="file" class="form-control" id="fotousuario" name="fotousuario" lang="es" required>
+            </div>
+      </div>
+      <div class="modal-footer">
+      <input class="form-control form-control-sm" type="text" id="member_id" name="member_id" value="<?php echo $_SESSION['member_id'] ?>">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 </body>

@@ -1,78 +1,25 @@
-<?php
+ <?php
 session_start();
 require_once('../modelo/ModelsRegistar.php');
 
 if (!empty($_GET['action'])) {
-    controladorRegistrar::main($_GET['action']);
+    controladorPerfil::main($_GET['action']);
 } else {
-    echo "No se encontro ninguna accion...";
+    echo "";
 }
 
-class controladorRegistrar
+class controladorPerfil
 {
-
     static function main($action)
     {
         if ($action == "crear") { //va a este menu 
-            controladorRegistrar::crear();
-        }else if($action=="inactivarUsuario"){
-            controladorRegistrar::inactivarUsuario();
-        }else if($action=="llenardatos"){
-            controladorRegistrar::llenardatos();
-        }else if($action=="Login"){
-            controladorRegistrar::Login();
-        }else if($action == "CerrarSession"){
-            controladorRegistrar::CerrarSession();
-        }else if($action == "editar"){
-            controladorRegistrar::editar();
-        }else if($action == "iditarimagen"){
-            controladorRegistrar::iditarimagen();
-        }
-    }
+            controladorPerfil::crear();
+        }else if ($action == "buscarID") {
+            controladorPerfil::buscarID();
+        }        
 
-    public function CerrarSession (){
+    }
       
-        session_destroy();
-        header("Location: ../vista/login.php");
-    }
-
-
-    public function Login (){
-       
-        try {
-            $response = [];
-            $User = $_POST['usuario'];
-            $Password = $_POST['contrasena'];
-            if(!empty($User) && !empty($Password)){
-               
-                $respuesta = ModelsRegistar::Login($User, $Password);
-                if (is_array($respuesta)) {
-                    $_SESSION['member_id'] = $respuesta['member_id'];
-                    $_SESSION['firstname'] = $respuesta['firstname'];
-                    $_SESSION['image'] = $respuesta['image'];
-                    $_SESSION['lastname'] = $respuesta['lastname'];
-                    header("Location: ../vista/home.php");
-                }else if($respuesta == "Password Incorrecto"){
-                  //echo "incorrecta";
-                  header("Location: ../vista/login.php");
-                    
-                }else if($respuesta == "No existe el usuario"){
-                    //echo "usuario no existe";
-                   header("Location: ../vista/login.php");
-                }
-            }else{
-               //echo "datos vacios";
-             header("Location: ../vista/login.php");
-            }
-            //echo json_encode($response);
-
-        } catch (Exception $e) {
-           header("Location: ../vista/index.php?respuesta=error");
-        }
-    }
-    
-    
-
     static public function crear()
     {
        
@@ -133,36 +80,14 @@ class controladorRegistrar
        
     }
 
-    static public function iditarimagen()
-    {
-        
-        try {
-          
-            $arrayUsuarios['member_id'] = $_POST['member_id'];
-            $arrayUsuarios['image'] = $_FILES['fotousuario']["name"];
-            $nombre_img = $_FILES['fotousuario']["tmp_name"];
-            $destino=$_SERVER["DOCUMENT_ROOT"]."/redsocial-master/redsocial/Vista/upload/".$_FILES['fotousuario']["name"];
-           
-            copy($nombre_img, $destino);
-            $Usuarios = new ModelsRegistar($arrayUsuarios);
-            
-            $Usuarios->editar();
-            header("Location: ../vista/gestionarUsuario.php");
-        } catch (Exception $e) {
-            echo $e;
-            //header("Location: ../Vista/editarArena.php?respuesta=errorr");
-        }
-       
-    }
 
-    
-
+ 
 
 
     static public function buscarID($id)
     {
         try {
-            return Usuario::buscarForId($id);
+            return ModelsRegistar::buscarForId($id);
         } catch (Exception $e) {
             header("Location: ../gestionarArena.php?respuesta=error");
         }

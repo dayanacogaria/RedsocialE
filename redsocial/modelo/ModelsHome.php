@@ -30,13 +30,13 @@ class ModelsHome extends db_abstract_class
                 $this->$campo = $valor;
             }
         }else {
-            $this ->content= "";
-            $this ->date_posted= "";
-            $this ->post_id= "";
-            $this ->member_id= "";
-            $this ->image= "";
-            $this ->firstname= "";
-            $this ->lastname= "";
+            $this->content= "";
+            $this->date_posted= "";
+            $this->post_id= "";
+            $this->member_id= "";
+            $this->image= "";
+            $this->firstname= "";
+            $this->lastname= "";
          
        }
     }
@@ -72,15 +72,19 @@ class ModelsHome extends db_abstract_class
         foreach ($getrows as $valor) {
             $blogs = new ModelsHome();
             $blogs->content = $valor['content'];
-            $blogs->date_posted = $valor['date_posted']; 
-            $blogs->post_id = $valor['post_id'];
-            $blogs->member_id = $valor['member_id'];
-            $blogs->image = $valor['image'];   
             $blogs->firstname = $valor['firstname']; 
-            $blogs->lastname = $valor['lastname']; 
-               
+            $blogs->image = $valor['image'];   
+            /*$blogs->date_posted = $valor['date_posted']; 
+            $blogs->post_id = $valor['post_id'];
+            $blogs->member_id = $valor['members.member_id'];
+            
+           
+            $blogs->lastname = $valor['lastname']; */
+            
+            
 
             array_push($arrayblog, $blogs);
+          
 
         }
         $tmp->Disconnect();
@@ -89,8 +93,7 @@ class ModelsHome extends db_abstract_class
 
      static function getAll()
     {
-        
-        return ModelsHome::buscar("select * from post LEFT JOIN members on members.member_id = post.member_id order by post_id DESC");
+        return ModelsHome::buscar("select content,firstname,image from post LEFT JOIN members on members.member_id = post.member_id order by post_id DESC");
     }
     static function getAllblog()
     {

@@ -49,6 +49,7 @@ abstract class db_abstract_class {
     public function getRow($query, $params=array()){
        
         try{
+           
             $stmt = $this->datab->prepare($query);
             $stmt->execute($params);
             return $stmt->fetch();

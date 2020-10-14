@@ -5,12 +5,12 @@ require_once('db_abstract_class.php');
 
 
 
-class ModelsRegistar extends db_abstract_class
+class Modelsfotos extends db_abstract_class
 {
-   private $member_id;
-   private $firstname;
-   private $lastname;
-   private $image;
+    private $photos_id ;
+    private $location;
+    private $member_id; 
+   
     /**
      * Especialidad constructor.
      * @param $idEspacialidad
@@ -27,25 +27,28 @@ class ModelsRegistar extends db_abstract_class
                 $this->$campo = $valor;
             }
         }else {
+            $this->photos_id= "";
+            $this->location= "";
             $this->member_id= "";
-            $this->firstname= "";
-            $this->lastname= "";
-            $this->image= "";
-           
+            
+         
        }
     }
 
     public static function buscarForId($id)
     {
-        $productosFotos = new ModelsRegistar();
+        $productosFotos = new blogs();
         if ($id > 0){
            
-            $getrow = $productosFotos->getRow("SELECT * FROM members WHERE member_id =?", array($id));
-            $productosFotos->member_id = $id;
+            $getrow = $actividades->getRow("SELECT * FROM actividades WHERE cod_act =?", array($id));
+            $productosFotos->prodnume = $id;
+            $productosFotos->prodprec = $getrow['prodprec'];
+            $productosFotos->proddesc = $getrow['proddesc'];
             
-            $productosFotos->firstname = $getrow['firstname'];
-            $productosFotos->lastname = $getrow['lastname'];
-            $productosFotos->image = $getrow['image'];
+            $productosFotos->prodnomb = $getrow['prodnomb'];
+            $productosFotos->prodfoto = $getrow['prodfoto'];
+            $productosFotos->catenume = $getrow['catenume'];
+            
             $productosFotos->Disconnect();
             return $productosFotos;
         }else{
@@ -55,22 +58,18 @@ class ModelsRegistar extends db_abstract_class
     
    public static function buscar($query)
     {
-        
+       
         $arrayblog = array();
-        $tmp = new blogs();
+        $tmp = new Modelsfotos();
         $getrows = $tmp->getRows($query);
 
         foreach ($getrows as $valor) {
-            $blogs = new blogs();
-            $blogs->blognume = $valor['blognume'];
-            $blogs->blogcont = $valor['blogcont'];
-           // $productosFotos->proddesc = $valor['proddesc'];
-            
-            $blogs->blogfoto = $valor['blogfoto'];
-            $blogs->blogfech = $valor['blogfech'];
-          
-
+            $blogs = new Modelsfotos();
+            $blogs->photos_id = $valor['photos_id'];
+            $blogs->location = $valor['location']; 
+            $blogs->member_id = $valor['member_id'];   
             array_push($arrayblog, $blogs);
+          
 
         }
         $tmp->Disconnect();
@@ -79,8 +78,8 @@ class ModelsRegistar extends db_abstract_class
 
      static function getAll()
     {
-        
-        return Productos::buscar("SELECT * FROM Productos_fotos");
+        $id =$_SESSION['member_id'];
+        return Modelsfotos::buscar("select * from photos where member_id=$id");
     }
     static function getAllblog()
     {
@@ -120,12 +119,18 @@ class ModelsRegistar extends db_abstract_class
     public function editar()
     {
        
-       
-        $this->updateRow("UPDATE socialdb.members SET image = ?
-         WHERE member_id = ?", array(
-                $this->image,
-                $this->member_id
-               
+        $time = time();
+        $this->updateRow("UPDATE sgc_minera.actividades SET ide_usua = ?, actividad = ?,
+         pago = ?, fecha = ?, desde = ?, hasta = ?, estado = ?
+         WHERE cod_act = ?", array(
+                $this->ide_usua,
+                $this->actividad,
+                $this->pago,
+                $this->fecha=date("Y-m-d ", $time),
+                $this->desde,
+                $this->hasta,
+                $this->estado,
+                $this->cod_act,
               
         ));
         $this->Disconnect();
@@ -140,7 +145,7 @@ class ModelsRegistar extends db_abstract_class
     public static function Login($User, $Password){
        
         $arrUsuarios = array();
-        $tmp = new ModelsRegistar();
+        $tmp = new ModelsHome();
         $getTempUser = $tmp->getRows("SELECT * FROM members WHERE username = '$User'" );
         if(count($getTempUser) >= 1){
          $getrows = $tmp->getRows("SELECT * FROM members WHERE  username = '$User' and password = '$Password'");
@@ -159,85 +164,68 @@ class ModelsRegistar extends db_abstract_class
         return $arrUsuarios;
     }
 
-   
+	 
+  
 
-   /**
-    * Get the value of member_id
-    */ 
-   public function getMember_id()
-   {
-      return $this->member_id;
-   }
+	
 
-   /**
-    * Set the value of member_id
-    *
-    * @return  self
-    */ 
-   public function setMember_id($member_id)
-   {
-      $this->member_id = $member_id;
+    /**
+     * Get the value of photos_id
+     */ 
+    public function getPhotos_id()
+    {
+        return $this->photos_id;
+    }
 
-      return $this;
-   }
+    /**
+     * Set the value of photos_id
+     *
+     * @return  self
+     */ 
+    public function setPhotos_id($photos_id)
+    {
+        $this->photos_id = $photos_id;
 
-   /**
-    * Get the value of firstname
-    */ 
-   public function getFirstname()
-   {
-      return $this->firstname;
-   }
+        return $this;
+    }
 
-   /**
-    * Set the value of firstname
-    *
-    * @return  self
-    */ 
-   public function setFirstname($firstname)
-   {
-      $this->firstname = $firstname;
+    /**
+     * Get the value of location
+     */ 
+    public function getLocation()
+    {
+        return $this->location;
+    }
 
-      return $this;
-   }
+    /**
+     * Set the value of location
+     *
+     * @return  self
+     */ 
+    public function setLocation($location)
+    {
+        $this->location = $location;
 
-   /**
-    * Get the value of lastname
-    */ 
-   public function getLastname()
-   {
-      return $this->lastname;
-   }
+        return $this;
+    }
 
-   /**
-    * Set the value of lastname
-    *
-    * @return  self
-    */ 
-   public function setLastname($lastname)
-   {
-      $this->lastname = $lastname;
+    /**
+     * Get the value of member_id
+     */ 
+    public function getMember_id()
+    {
+        return $this->member_id;
+    }
 
-      return $this;
-   }
+    /**
+     * Set the value of member_id
+     *
+     * @return  self
+     */ 
+    public function setMember_id($member_id)
+    {
+        $this->member_id = $member_id;
 
-   /**
-    * Get the value of image
-    */ 
-   public function getImage()
-   {
-      return $this->image;
-   }
-
-   /**
-    * Set the value of image
-    *
-    * @return  self
-    */ 
-   public function setImage($image)
-   {
-      $this->image = $image;
-
-      return $this;
-   }
+        return $this;
+    }
 }?>
