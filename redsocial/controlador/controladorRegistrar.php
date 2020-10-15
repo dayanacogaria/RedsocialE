@@ -51,6 +51,9 @@ class controladorRegistrar
                     $_SESSION['firstname'] = $respuesta['firstname'];
                     $_SESSION['image'] = $respuesta['image'];
                     $_SESSION['lastname'] = $respuesta['lastname'];
+                    $_SESSION['address'] = $respuesta['address'];
+                    $_SESSION['mobile'] = $respuesta['mobile'];
+                    $_SESSION['birthdate'] = $respuesta['birthdate'];
                     header("Location: ../vista/home.php");
                 }else if($respuesta == "Password Incorrecto"){
                   //echo "incorrecta";

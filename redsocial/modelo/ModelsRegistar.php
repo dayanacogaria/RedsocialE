@@ -11,6 +11,14 @@ class ModelsRegistar extends db_abstract_class
    private $firstname;
    private $lastname;
    private $image;
+   private $username;
+   private $password;
+   private $gender;
+   private $address;
+   private $birthdate;
+   private $mobile;
+   private $work;
+
     /**
      * Especialidad constructor.
      * @param $idEspacialidad
@@ -46,6 +54,13 @@ class ModelsRegistar extends db_abstract_class
             $productosFotos->firstname = $getrow['firstname'];
             $productosFotos->lastname = $getrow['lastname'];
             $productosFotos->image = $getrow['image'];
+            $productosFotos->username = $getrow['username'];
+            $productosFotos->password = $getrow['password'];
+            $productosFotos->gender = $getrow['gender'];
+            $productosFotos->address = $getrow['address'];
+            $productosFotos->birthdate = $getrow['birthdate'];
+            $productosFotos->mobile = $getrow['mobile'];
+            $productosFotos->work = $getrow['work'];
             $productosFotos->Disconnect();
             return $productosFotos;
         }else{
@@ -119,14 +134,29 @@ class ModelsRegistar extends db_abstract_class
 
     public function editar()
     {
-       
-       
         $this->updateRow("UPDATE socialdb.members SET image = ?
          WHERE member_id = ?", array(
                 $this->image,
                 $this->member_id
-               
-              
+        ));
+        $this->Disconnect();
+    }
+
+    public function editarperfil()
+    {
+        $this->updateRow("UPDATE socialdb.members SET  firstname = ? , lastname =  ?
+        ,address = ?, gender = ?, username = ?, password = ? , birthdate = ?, mobile = ?, work = ?
+         WHERE member_id = ?", array(
+                $this->firstname,
+                $this->lastname,
+                $this->address,
+                $this->gender,
+                $this->username,
+                $this->password,
+                $this->birthdate,
+                $this->mobile,
+                $this->work,
+                $this->member_id
         ));
         $this->Disconnect();
     }
@@ -240,4 +270,148 @@ class ModelsRegistar extends db_abstract_class
 
       return $this;
    }
+
+
+    /**
+    * Get the value of image
+    */ 
+    public function getUsername()
+    {
+       return $this->username;
+    }
+ 
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setUsername($username)
+    {
+       $this->username = $username;
+ 
+       return $this;
+    }
+
+    /**
+    * Get the value of image
+    */ 
+    public function getPassword()
+    {
+       return $this->password;
+    }
+ 
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setPassword($password)
+    {
+       $this->password = $password;
+ 
+       return $this;
+    }
+
+
+ /**
+    * Get the value of image
+    */ 
+    public function getGender()
+    {
+       return $this->gender;
+    }
+ 
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setGender($gender)
+    {
+       $this->gender = $gender;
+ 
+       return $this;
+    }
+
+
+    /**
+    * Get the value of image
+    */ 
+    public function getAddress()
+    {
+       return $this->address;
+    }
+ 
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setAddress($address)
+    {
+       $this->address = $address;
+ 
+       return $this;
+    }
+
+    /**
+    * Get the value of image
+    */ 
+    public function getBirthdate()
+    {
+       return $this->birthdate;
+    }
+ 
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setBirthdate($birthdate)
+    {
+       $this->birthdate = $birthdate;
+ 
+       return $this;
+    }
+
+    /**
+    * Get the value of image
+    */ 
+    public function getMobile()
+    {
+       return $this->mobile;
+    }
+ 
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setMobile($mobile)
+    {
+       $this->mobile = $mobile;
+ 
+       return $this;
+    }
+
+
+    public function getWork()
+    {
+       return $this->work;
+    }
+ 
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setWork($work)
+    {
+       $this->work = $work;
+ 
+       return $this;
+    }
+
+
+
 }?>

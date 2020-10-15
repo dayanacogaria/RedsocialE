@@ -36,11 +36,11 @@ if (empty($_SESSION['firstname'])){
                     </button>
 				</div>
 				<div class="box">
-					<div class="name"><strong><?php echo $_SESSION['firstname'] ?></strong></div>
+					<div class="name"><strong><?php echo $_SESSION['firstname'] ?>&nbsp;<?php echo $_SESSION['lastname'] ?></strong></div>
 					<div class="info">
-						<span><i class="fa fa-fw fa-mobile"></i> <a href="tel:+4210555888777" title="#">(1)577235 </a></span>
-						<span><i class="fa fa-fw fa-calendar"></i> <a href="#" title="#">27/05/1995</a></span>
-						<span><i class="fa fa-fw fa-home"></i> calle x 54-9</span>
+						<span><i class="fa fa-fw fa-mobile"></i> <a href="#<?php echo $_SESSION['mobile'] ?>" title="#"><?php echo $_SESSION['mobile'] ?></a></span>
+						<span><i class="fa fa-fw fa-calendar"></i> <a href="#" title="#"><?php echo $_SESSION['birthdate'] ?></a></span>
+						<span><i class="fa fa-fw fa-home"></i> <?php echo $_SESSION['address'] ?></span>
 					</div>
 				
 				</div>
@@ -51,10 +51,13 @@ if (empty($_SESSION['firstname'])){
 			<div class="box">
 				
 					<div class="post-editor">
-
-                        <textarea name="post-field" id="post-field" class="post-field" placeholder="¿que estas pensando?"></textarea> 
+          <form  action="../controlador/controladorHome.php?action=crear" method="post">
+                         
+                        <textarea  id="content" name="content" class="post-field" placeholder="¿que estas pensando?"></textarea> 
+                        <input id="member_id" name="member_id" value="<?php echo $_SESSION['member_id'] ?>" hidden/>
                         <div class="d-flex">
-                        <button class="btn btn-info px-4 py-1">Compartir</button>
+                        <button class="btn btn-info px-4 py-1" type="submit">Compartir</button>
+                        </form>
                    </div>
              </div>
 
@@ -67,8 +70,9 @@ if (empty($_SESSION['firstname'])){
                     <a href="#" class="sp-author-avatar"><img src="upload/<?php echo $Usuarios->getImage () ?>" alt=""></a>
                     <h6 class="sp-author-name"><?php echo $Usuarios->getfirstname() ?></h6></div>
                 <div class="sp-content">
-                    <div class="sp-info"><h6><?php echo $Usuarios->getfirstname() ?></h6></div>
+                    <div class="sp-info"><h6><?php echo $Usuarios->getfirstname() ?>&nbsp;<?php echo $Usuarios->getlastname() ?></h6></div>
                     <p class="sp-paragraph mb-0"><?php echo $Usuarios->getcontent() ?></p>
+                    <div class="sp-info"><h6><?php echo $Usuarios->getdate_posted() ?></h6></div>
                 </div>
                
             </div>

@@ -73,7 +73,10 @@ class ModelsHome extends db_abstract_class
             $blogs = new ModelsHome();
             $blogs->content = $valor['content'];
             $blogs->firstname = $valor['firstname']; 
-            $blogs->image = $valor['image'];   
+            $blogs->image = $valor['image']; 
+            $blogs->lastname = $valor['lastname']; 
+            $blogs->date_posted = $valor['date_posted'];
+
             /*$blogs->date_posted = $valor['date_posted']; 
             $blogs->post_id = $valor['post_id'];
             $blogs->member_id = $valor['members.member_id'];
@@ -93,7 +96,7 @@ class ModelsHome extends db_abstract_class
 
      static function getAll()
     {
-        return ModelsHome::buscar("select content,firstname,image from post LEFT JOIN members on members.member_id = post.member_id order by post_id DESC");
+        return ModelsHome::buscar("select content,firstname,image,lastname,date_posted from post LEFT JOIN members on members.member_id = post.member_id order by post_id DESC");
     }
     static function getAllblog()
     {
@@ -104,28 +107,11 @@ class ModelsHome extends db_abstract_class
     public function insertar()
     {
         
-        $this->insertRow("INSERT INTO socialdb.members VALUES (NULL, ?, ?, ?,?,?,?,?,?,?, ?, ?,?,?,?,?,?)", array(
-           
-            
-            $this->nombre,
-            $this->apellido,
-            $this->middlename='',
-            $this->direccion,
-            $this->email='',
-            $this->contact_no='',
-            $this->age=0,
-            $this->genero,
-            $this->usuario,
-            $this->contrasena,
-            $this->image='avatar.jpg', 
-            $this->fechan,
-            $this->cel,
-            $this->status='Activo',
-            $this->trabajo,
-            $this->religion=''
-              
-               
-            )
+        $this->insertRow("INSERT INTO socialdb.post VALUES (NULL, ?, ?,null)", array(
+                    
+            $this->member_id,
+            $this->content
+             )
         );
         $this->Disconnect();
     }

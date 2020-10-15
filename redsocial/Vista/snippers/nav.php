@@ -8,7 +8,7 @@
       <li class="active"><a href="home.php"><span class="glyphicon glyphicon-home"></span>&nbsp;Inicio</a></li>
       <li><a href="perfil.php?id=<?php echo $_SESSION['member_id'];?>"><span class="glyphicon glyphicon-user"></span>&nbsp;Perfil</a></li>
       <li><a href="Photos.php"><span class="glyphicon glyphicon-picture"></span>&nbsp;Fotos</a></li>
-      <li><a href="amigos.html"><span class="glyphicon glyphicon-user"></span>&nbsp;Amigos</a></li>
+      <li><a href="amigos.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Amigos</a></li>
       <li><a href="chat.html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Mensaje</a></li>
       <li><a href="../Controlador/controladorRegistrar.php?action=CerrarSession" ><span class="glyphicon glyphicon-log-out"></span>&nbsp;Cerrar Sesion</a></li>
     </ul>

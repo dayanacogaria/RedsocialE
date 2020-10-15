@@ -10,6 +10,7 @@ class Modelsfotos extends db_abstract_class
     private $photos_id ;
     private $location;
     private $member_id; 
+    private $lastname;
    
     /**
      * Especialidad constructor.
@@ -68,6 +69,7 @@ class Modelsfotos extends db_abstract_class
             $blogs->photos_id = $valor['photos_id'];
             $blogs->location = $valor['location']; 
             $blogs->member_id = $valor['member_id'];   
+          
             array_push($arrayblog, $blogs);
           
 
@@ -228,4 +230,23 @@ class Modelsfotos extends db_abstract_class
 
         return $this;
     }
+
+/**
+     * Get the value of lastname
+     */ 
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+    /**
+     * Set the value of lastname
+     *
+     * @return  self
+     */ 
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+        return $this;
+    }
+
 }?>

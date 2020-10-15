@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../modelo/ModelsRegistar.php');
+require_once('../modelo/ModelsHome.php');
 
 if (!empty($_GET['action'])) {
     controladorHome::main($_GET['action']);
@@ -23,26 +23,12 @@ class controladorHome
        
         try {
             $arrayUsuarios = array();
-            $arrayUsuarios['usuario'] = $_POST['usuario'];
-            $arrayUsuarios['contrasena'] = $_POST['contrasena'];
-            $arrayUsuarios['nombre'] = $_POST['nombre'];
-            $arrayUsuarios['apellido'] = $_POST['apellido'];
-            $arrayUsuarios['genero'] = $_POST['genero'];
-            $arrayUsuarios['direccion'] = $_POST['direccion'];
-            $arrayUsuarios['fechan'] = $_POST['fechan'];
-            $arrayUsuarios['cel'] = $_POST['cel'];
-            $arrayUsuarios['trabajo'] = $_POST['trabajo'];
-            
-           // $arrayUsuarios['blogfoto'] = $_FILES['blogfoto']["name"];
-           // $nombre_img = $_FILES['blogfoto']["tmp_name"];
-           // $destino=$_SERVER["DOCUMENT_ROOT"]."/suana/Vista/img/blogs/".$_FILES['blogfoto']["name"];
-           
-           //copy($nombre_img, $destino);
-           
-            $ModelsRegistar = new ModelsRegistar( $arrayUsuarios);
+            $arrayUsuarios['member_id'] = $_POST['member_id'];
+            $arrayUsuarios['content'] = $_POST['content'];            
+            $ModelsRegistar = new ModelsHome( $arrayUsuarios);
 
             $ModelsRegistar->insertar();
-            header("Location: ../Vista/login.html");
+            header("Location: ../Vista/home.php");
         } catch (Exception $e) {
             echo $e;
         }

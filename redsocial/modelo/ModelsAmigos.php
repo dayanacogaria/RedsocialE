@@ -12,6 +12,8 @@ class ModelsAmigos extends db_abstract_class
     private $friends_id; 
     private $firstname;
     private $image; 
+    private $lastname;
+    private $work;
    
     /**
      * Especialidad constructor.
@@ -72,6 +74,8 @@ class ModelsAmigos extends db_abstract_class
             $blogs->member_id = $valor['member_id'];
             $blogs->firstname = $valor['firstname']; 
             $blogs->image = $valor['image'];   
+            $blogs->lastname = $valor['lastname']; 
+            $blogs->work = $valor['work']; 
             array_push($arrayblog, $blogs);
           
 
@@ -83,7 +87,9 @@ class ModelsAmigos extends db_abstract_class
      static function getAll()
     {
         $id =$_SESSION['member_id'];
-        return ModelsAmigos::buscar("select member_id,firstname, image from members join friends on friends_id=members.member_id and my_id=$id");
+        return ModelsAmigos::buscar("select members.member_id , members.firstname , members.lastname , members.image , friends.friends_id ,members.work  from members  , friends
+        where friends.my_friend_id = '$id' and members.member_id = friends.my_id
+        OR friends.my_id = '$id' and members.member_id = friends.my_friend_id");
     }
     static function getAllblog()
     {
@@ -269,4 +275,46 @@ class ModelsAmigos extends db_abstract_class
 
         return $this;
     }
+
+/**
+    * Get the value of lastname
+    */ 
+    public function getLastname()
+    {
+       return $this->lastname;
+    }
+ 
+    /**
+     * Set the value of lastname
+     *
+     * @return  self
+     */ 
+    public function setLastname($lastname)
+    {
+       $this->lastname = $lastname;
+ 
+       return $this;
+    }
+
+
+    public function getWork()
+    {
+       return $this->work;
+    }
+ 
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setWork($work)
+    {
+       $this->work = $work;
+ 
+       return $this;
+    }
+
+
+
+
 }?>

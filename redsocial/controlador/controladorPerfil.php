@@ -16,7 +16,9 @@ class controladorPerfil
             controladorPerfil::crear();
         }else if ($action == "buscarID") {
             controladorPerfil::buscarID();
-        }        
+        }else if ($action == "editar") {
+            controladorPerfil::editar();
+        }         
 
     }
       
@@ -53,26 +55,21 @@ class controladorPerfil
     static public function editar()
     {
         try {
-            $arrayUsuarios['ide_usua'] = $_POST['documento'];
-            $arrayUsuarios['nombUsua'] = $_POST['nombUsua'];
-            $arrayUsuarios['apeUsua'] = $_POST['apeUsua'];
-            $arrayUsuarios['direccion'] = $_POST['direccion'];
-            $arrayUsuarios['telefono'] = $_POST['telefono'];
-            $arrayUsuarios['telFamiliar'] = $_POST['telFamiliar'];
-            $arrayUsuarios['nomFamiliar'] = $_POST['nomFamiliar'];
-            $arrayUsuarios['riesgos'] = $_POST['riesgos'];
-            $arrayUsuarios['eps'] = $_POST['eps'];
-            $arrayUsuarios['pension'] = $_POST['pension'];
-            $arrayUsuarios['rh'] = $_POST['rh'];
-            $arrayUsuarios['rol'] = $_POST['rol'];
-            $arrayUsuarios['usuario'] = $_POST['usuario'];
-            $arrayUsuarios['contrasena'] = $_POST['contrasena'];
-            $arrayUsuarios['estado'] = $_POST['estado'];
-            $arrayUsuarios['documentowhere'] = $_POST['documentowhere'];
-            $Usuarios = new Usuario($arrayUsuarios);
+            $arrayUsuarios['firstname'] = $_POST['firstname'];
+            $arrayUsuarios['lastname'] = $_POST['lastname'];
+            $arrayUsuarios['address'] = $_POST['address'];
+            $arrayUsuarios['gender'] = $_POST['gender'];
+            $arrayUsuarios['username'] = $_POST['username'];
+            $arrayUsuarios['password'] = $_POST['password'];
+            $arrayUsuarios['birthdate'] = $_POST['birthdate'];
+            $arrayUsuarios['mobile'] = $_POST['mobile'];
+            $arrayUsuarios['work'] = $_POST['work'];
+            $arrayUsuarios['member_id'] = $_POST['member_id'];
             
-            $Usuarios->editar();
-            header("Location: ../vista/gestionarUsuario.php");
+            $Usuarios = new ModelsRegistar($arrayUsuarios);
+            
+            $Usuarios->editarperfil();
+            header("Location: ../vista/home.php");
         } catch (Exception $e) {
             echo $e;
             //header("Location: ../Vista/editarArena.php?respuesta=errorr");

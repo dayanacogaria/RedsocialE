@@ -60,7 +60,7 @@ if (empty($_SESSION['firstname'])){
       <a href="/w3images/lights.jpg">
         <img src="upload/<?php echo $Usuarios->getLocation() ?>" alt="Lights" style="width:100%">
         <div class="caption">
-          <p>Lorem ipsum...</p>
+          
         </div>
       </a>
     </div>
